@@ -16,6 +16,8 @@ if uploaded_file is not None:
     st.write(df)
 else:
     st.info("Please upload a CSV file to begin.")
+
+df = pd.read_csv(uploaded_file)
 # --- PREPARE DATA ---
 # Example assumes Iris dataset format
 X = df.drop(columns=["Id","Species"])   # features
