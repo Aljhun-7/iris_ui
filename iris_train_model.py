@@ -1,3 +1,4 @@
+import streamlit as st
 import joblib
 import gdown
 from sklearn.tree import DecisionTreeClassifier
