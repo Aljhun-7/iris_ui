@@ -15,6 +15,7 @@ def load_data():
     return pd.read_csv(output)
 
 df = load_data()
+st.write(df)
 
 # Prepare data of the Iris dataset
 # features
