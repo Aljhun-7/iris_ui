@@ -1,16 +1,31 @@
 import joblib
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import load_iris
+import gdown
+from sklearn.tree import DecisionTreeClassifier
 
-# 1. Load some sample data
-data = load_iris()
-X, y = data.data, data.target
+# Load the Iris dataset
+file_id = "1FBCKZI4KKtlvZaY8XgvAcvLHo5We0ORF"
+url = f"https://drive.google.com/uc?export=download&id={file_id}"
+output = "Iris.csv"
 
-# 2. Train the model
-model = RandomForestClassifier()
+@st.cache_data
+def load_data():
+    gdown.download(url, output, quiet=False)
+    return pd.read_csv(output)
+
+df = load_data()
+
+# Prepare data of the Iris dataset
+# features
+X = df.drop(columns=["Id","Species"])
+# target
+y = df["Species"]
+
+# Train model
+model = DecisionTreeClassifier()
 model.fit(X, y)
 
-# 3. Save the model to a file
+
+# Save the model to a file
 # This creates 'iris_model.joblib' in your current folder
 joblib.dump(model, 'iris_model.joblib')
 
