@@ -2,14 +2,14 @@ import streamlit as st
 import joblib
 import numpy as np
 
-# --- 1. Page Configuration ---
+# page configuration
 st.set_page_config(
     page_title="Iris Species Predictor",
     page_icon="🌸",
     layout="wide"
 )
 
-# --- 2. Custom CSS for Styling ---
+# custom CSS
 st.markdown("""
     <style>
     .main {
@@ -32,7 +32,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. Model Loading ---
+# model loading
 @st.cache_resource
 def load_my_model():
     # Ensure this file exists in your directory!
@@ -44,12 +44,14 @@ except FileNotFoundError:
     st.error("⚠️ Model file not found. Please run your training script first!")
     st.stop()
 
-# --- 4. Sidebar Inputs ---
-with st.sidebar:
-    st.image("https://wikimedia.org", caption="Iris Flower Guide", use_container_width=True)
-    st.header("⚙️ Feature Inputs")
-    st.info("Adjust the sliders below to define the flower measurements.")
-    
+# main dashboard
+st.title("🌸 Iris Flower Classification")
+st.markdown("Aljhun R. Angala | ")
+
+col1, col2 = st.columns([2, 1])
+
+# flower prediction side
+with col1:
     sepal_l = st.slider("Sepal Length (cm)", 4.0, 8.0, 5.1)
     sepal_w = st.slider("Sepal Width (cm)", 2.0, 4.5, 3.5)
     petal_l = st.slider("Petal Length (cm)", 1.0, 7.0, 1.4)
@@ -57,24 +59,7 @@ with st.sidebar:
     
     predict_btn = st.button("🚀 Predict Species")
 
-# --- 5. Main Dashboard ---
-st.title("🌸 Iris Flower Classification")
-st.markdown("This application uses a pre-trained **Random Forest** model to identify Iris species instantly without retraining.")
-
-col1, col2 = st.columns([2, 1])
-
-with col1:
-    st.subheader("📊 Input Summary")
-    # Displaying inputs in a clean table/metric format
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Sepal L", f"{sepal_l}cm")
-    m2.metric("Sepal W", f"{sepal_w}cm")
-    m3.metric("Petal L", f"{petal_l}cm")
-    m4.metric("Petal W", f"{petal_w}cm")
-
-    # Add a visual chart or placeholder
-    st.bar_chart(np.array([sepal_l, sepal_w, petal_l, petal_w]))
-
+# species result side
 with col2:
     st.subheader("🎯 Prediction Result")
     if predict_btn:
@@ -94,6 +79,6 @@ with col2:
         
         st.balloons()
     else:
-        st.write("Click 'Predict Species' in the sidebar to see results.")
+        st.write("Click 'Predict Species' to see results.")
 
 
