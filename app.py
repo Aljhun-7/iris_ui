@@ -45,8 +45,8 @@ except FileNotFoundError:
     st.stop()
 
 # main dashboard
-st.title("🌸 Iris Flower Classification")
-st.markdown("Aljhun R. Angala | ")
+st.title("🌸 Iris Flower Species Predictor")
+st.markdown("Aljhun Angala | Charlene Hipolito | David Datu Sarmiento | Christine Lopez | Allyza Kaye Wong")
 
 col1, col2 = st.columns([2, 1])
 
@@ -79,6 +79,6 @@ with col2:
         
         st.balloons()
     else:
-        st.write("Click 'Predict Species' to see results.")
+        st.write("Click Predict Species to see results.")
 
 
