@@ -1,6 +1,7 @@
-streamlit
+
 scikit-learn
 gdown
 pandas
 joblib
 numpy
+Streamlit
