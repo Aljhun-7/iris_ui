@@ -15,8 +15,9 @@ import joblib
 import gdown
 file_path = '/content/drive/MyDrive/Iris_Dataset/Iris.csv'
 
-from sklearn.tree import DecisionTreeClassifier
-
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 df = pd.read_csv(file_path)
 df
@@ -25,8 +26,12 @@ X = df.drop(columns=["Id","Species"])
 
 y = df["Species"]
 
-model = DecisionTreeClassifier()
+model = RandomForestClassifier(n_estimators=100, max_depth=3, random_state=42)
 model.fit(X, y)
+
+predictions = model.predict(X_test)
+score = accuracy_score(y_test, predictions)
+score
 
 joblib.dump(model, 'iris_model.joblib')
 print("✅ iris_model.joblib created successfully!")
